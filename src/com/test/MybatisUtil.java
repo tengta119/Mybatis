@@ -1,9 +1,8 @@
 package com.test;
-
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 

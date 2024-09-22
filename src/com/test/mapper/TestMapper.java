@@ -11,4 +11,5 @@ public interface TestMapper {
     User selectUserByIdAndAge(int id, int age);
     int insertUser(User user);
     int updateAgeById(User user);
+    int insertUsers(List<String> users);
 }
