@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.TestMapper">
+    <select id="selectAllUser" resultType="User">
+        select * from user
+    </select>
+
+    <select id="selectUserById" resultMap="testB">
+        select * from user left join book on user.id = book.uid where user.id = #{id}
+    </select>
+
+    <select id="selectUserDetailById" resultType="UserDetail">
+        select * from user_detail where id = #{id}
+    </select>
+
+    <select id="selectUserByIdAndAge" resultType="User">
+        select * from user where id = #{param1} and age = #{param2}
+    </select>
+
+    <select id="selectUserByAge" resultType="User">
+        select * from user where age > #{age}
+    </select>
+
+    <resultMap id="test" type="User">
+        <constructor>
+            <idArg column="id" javaType="_int"/>
+            <arg column="name" javaType="String"/>
+            <arg column="age" javaType="_int"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="testL" type="com.test.entity.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <association property="detail" column="id" select="selectUserDetailById"/>
+    </resultMap>
+
+    <resultMap id="testB" type="User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <collection property="books" ofType="Book">
+            <id column="bid" property="bid"/>
+            <result column="title" property="title"/>
+            <result column="uid" property="uid"/>
+        </collection>
+    </resultMap>
+
+</mapper>
