@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         SqlSession sqlSession = MybatisUtil.getSqlSession(true);
         TestMapper mapper = sqlSession.getMapper(TestMapper.class);
-        System.out.println(mapper.selectUserById(1));
-
+        //System.out.println(mapper.selectUserById(1));
+        mapper.selectAllUser().forEach(System.out::println);
     }
 }
