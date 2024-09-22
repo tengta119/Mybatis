@@ -3,20 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mapper.TestMapper">
-    <select id="selectAllUser" resultMap="testG">
-        select *, my_group.name as gname from user left join my_group on user.gid = my_group.gid
+    <select id="selectAllUser" >
+        select * from user
     </select>
 
-    <resultMap id="testG" type="User">
-        <id column="id" property="id"/>
-        <result column="name" property="name"/>
-        <result column="age" property="age"/>
-        <association property="group">
-            <id column="gid" property="gid"/>
-            <result column="gname" property="name"/>
-        </association>
-    </resultMap>
-    
     <select id="selectUserById">
         select * from user where id = #{id}
     </select>
@@ -32,6 +22,14 @@
     <select id="selectUserByAge" resultType="User">
         select * from user where age > #{age}
     </select>
+
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into user (name, age) values (#{name}, #{age})
+    </insert>
+
+    <update id="updateAgeById">
+        update user set age = #{age} where id = #{id}
+    </update>
 
     <resultMap id="test" type="User">
         <constructor>
@@ -57,6 +55,16 @@
             <result column="title" property="title"/>
             <result column="uid" property="uid"/>
         </collection>
+    </resultMap>
+
+    <resultMap id="testG" type="User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <association property="group">
+            <id column="gid" property="gid"/>
+            <result column="gname" property="name"/>
+        </association>
     </resultMap>
 
 </mapper>

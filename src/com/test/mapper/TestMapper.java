@@ -9,4 +9,6 @@ public interface TestMapper {
     List<User> selectAllUser();
     User selectUserById(int id);
     User selectUserByIdAndAge(int id, int age);
+    int insertUser(User user);
+    int updateAgeById(User user);
 }
