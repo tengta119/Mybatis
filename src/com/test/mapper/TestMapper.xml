@@ -9,9 +9,6 @@
 
     <select id="selectUserById">
         select * from user where id = #{id}
-        <if test="id > 3">
-            and age > 18
-        </if>
     </select>
 
     <select id="selectUserDetailById" resultType="UserDetail">
